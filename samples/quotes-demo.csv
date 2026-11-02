@@ -1,0 +1,4 @@
+name,currency,price,lead_time_weeks,payment_days
+供应商A,CNY,842000,8,30
+供应商B,CNY,794000,14,0
+供应商C,CNY,560000,10,30
