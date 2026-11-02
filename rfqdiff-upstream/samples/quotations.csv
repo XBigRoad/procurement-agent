@@ -1,0 +1,3 @@
+name,currency,price,lead_time_weeks,payment_days
+Supplier A,EUR,84200,8,30
+Supplier B,EUR,79400,14,0

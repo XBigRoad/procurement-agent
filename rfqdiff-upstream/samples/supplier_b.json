@@ -1,0 +1,7 @@
+{
+  "name": "Supplier B",
+  "currency": "EUR",
+  "price": 79400,
+  "lead_time_weeks": 14,
+  "payment_days": 0
+}
