@@ -25,3 +25,9 @@ Published functional commit `336c151f8481858aa1b7583d28f64d8233d5c2f3` to
 `origin/main`; `git ls-remote` matched local HEAD. Staged source review found no
 generated reports, uploaded originals, environment files or credential patterns.
 GitHub workflow run 41393260422 started for Windows and Ubuntu verification.
+
+The initial Ubuntu CI run exposed one test reading ignored local XLSX fixtures.
+Changed that upload test to generate fixed-date JSON/XLSX inputs in `tmp_path`.
+A clean index export, with no generated sample workbooks and imports confirmed to
+resolve inside the export, passed 257 application tests (26.20s), 38 upstream tests
+(1.11s), Ruff and the three acceptance scenarios. Production code was unchanged.

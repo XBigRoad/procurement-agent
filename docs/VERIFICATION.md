@@ -7,7 +7,7 @@
 
 | 检查 | 实际结果 |
 |---|---|
-| 应用测试 `python -m pytest tests -q` | 257 passed，18.04s，退出码0 |
+| 应用测试 `python -m pytest tests -q` | 干净代码副本中257 passed，26.20s，退出码0 |
 | Ruff `python -m ruff check procurement_agent tests` | All checks passed，退出码0 |
 | 保留上游回归测试 | 38 passed，1.11s，退出码0 |
 | 安装脚本 `pwsh -NoProfile -File scripts/install.ps1` | 退出码0，安装后 CLI 帮助可运行 |
@@ -15,6 +15,8 @@
 | 本地服务 `http://127.0.0.1:8511/_stcore/health` | HTTP 200，响应 `ok` |
 | 真实浏览器操作 | 上传、异常拦截、复核上传重算及 JSON/Excel 下载已实际执行 |
 | `git diff --check` | 退出码0 |
+| `git diff --cached --check` | 清理初始化模板空白后退出码0 |
+| 干净代码副本复验 | 仅导出暂存源文件，确认使用副本模块且没有本机生成的样例工作簿；应用、上游、Ruff及业务验收全部通过 |
 
 合计295项自动化测试通过。安装工具提示跨磁盘硬链接不可用，自动改用复制，
 安装正常完成。上表记录本地运行结果；远端平台验证由 GitHub Actions 另行报告。
@@ -64,6 +66,9 @@ git diff --check
 5. 复核跨会话复用：相同文件内容与规则在不同上传目录仍可复核；实质输入变化会使旧复核失效。
 6. 网页和引擎权重一致：默认价格50%、交期30%、账期20%。
 7. 上游证据字节一致：为保留的黄金样本指定LF，避免Windows换行改变哈希；用户文件保持原始字节。
+8. 干净检出测试：首次 GitHub Ubuntu 运行暴露上传测试依赖未入库的本机 Excel 样例，
+   报错为 `FileNotFoundError: samples/v1/quotes.xlsx`。该测试改为在自己的临时目录
+   生成固定日期的 JSON/XLSX 样例，保持原有的真实上传和原始字段证据断言。
 
 相关回归见 `tests/test_engine.py`、`tests/test_app.py`、
 `tests/test_reports_v2.py`；输入边界与位置证据见 `tests/test_ingest.py`。

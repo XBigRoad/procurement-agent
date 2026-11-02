@@ -13,6 +13,7 @@ from openpyxl import load_workbook
 from streamlit.testing.v1 import AppTest
 
 from procurement_agent import app
+from procurement_agent.templates import write_templates
 
 WEIGHTS = {"price": 0.6, "lead_time": 0.25, "payment_terms": 0.15}
 ANALYSIS_DATE = date(2026, 11, 2)
@@ -357,9 +358,12 @@ def test_demo_real_service_integration(caplog):
 
 
 @pytest.mark.parametrize("suffix", ["json", "xlsx"])
-def test_real_upload_comparison_uses_service_and_preserves_source_evidence(monkeypatch, suffix):
+def test_real_upload_comparison_uses_service_and_preserves_source_evidence(monkeypatch, tmp_path, suffix):
+    # Generate each format inside the test; ignored local workbooks are not
+    # available in a fresh checkout or on a CI runner.
+    write_templates(tmp_path, as_of=ANALYSIS_DATE)
     files = {
-        key: [_uploaded(f"{name}.{suffix}", (app.DEMO_DIR / f"{name}.{suffix}").read_bytes())]
+        key: [_uploaded(f"{name}.{suffix}", (tmp_path / f"{name}.{suffix}").read_bytes())]
         for key, name in (("quote_uploads", "quotes"), ("history_uploads", "history"), ("market_uploads", "market"))
     }
     original_uploader = app.st.file_uploader
