@@ -10,7 +10,7 @@
 - [x] Run baseline/regression/acceptance tests and ruff; fix observed failures.
 - [x] Exercise CLI outputs, review loop and localhost app, inspect generated workbook.
 - [x] Record exact verification evidence, update relevant specs and user documentation.
-- [ ] Inspect staged diff for private data, commit and push; verify remote commit.
+- [x] Inspect staged diff for private data, commit and push; verify remote commit.
 
 Validation: `.venv/Scripts/python.exe -m pytest tests`, upstream tests separately;
 `.venv/Scripts/python.exe -m ruff check procurement_agent tests`; CLI demonstrations;
@@ -20,3 +20,8 @@ Streamlit AppTest and HTTP health endpoint. Keep before/after reports in ignored
 Latest verification: 257 application tests, 38 upstream tests, Ruff, installer and
 three-scenario acceptance passed. Real browser exercised upload, low-price block,
 review replay and JSON/XLSX downloads. See `docs/VERIFICATION.md` for exact results.
+
+Published functional commit `336c151f8481858aa1b7583d28f64d8233d5c2f3` to
+`origin/main`; `git ls-remote` matched local HEAD. Staged source review found no
+generated reports, uploaded originals, environment files or credential patterns.
+GitHub workflow run 41393260422 started for Windows and Ubuntu verification.
