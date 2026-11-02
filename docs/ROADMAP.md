@@ -1,22 +1,21 @@
-# Enterprise procurement agent extension roadmap
+# 采购审核后续路线图
 
-## Now
+## V1 已实现
 
-- Preserve source provenance for every extracted quote field.
-- Normalize currency, tax, units and freight before comparison.
-- Require explicit comparability status before ranking.
-- Flag unusually low/high quotes against peer and historical medians.
-- Keep technical compliance, supplier risk and commercial scoring separate.
+结构化 XLSX/CSV/JSON、多供应商逐物料评分、税费标准化、严格可比性、四类价格基准、五种价格分类、字段级原始证据、风险阻断、具名人工复核和重新计算、JSON/Excel/中文建议、本机上传审核界面和Windows启动脚本。
 
-## Next
+## 下一阶段：真实业务试点
 
-- Chinese PDF/image quotation extraction with page/region citations.
-- Material, mold and equipment profiles with module-specific fields.
-- Historical price snapshots and supplier delivery/quality facts.
-- Total-cost-of-ownership calculator for equipment and molds.
-- Human review queue for ambiguous matches and missing quote fields.
-- Golden test cases built from fully redacted company examples.
+以脱敏真实报价建立验收样本库，覆盖原材料、模具、设备以及常见供应商报价布局。由采购和技术人员核验字段识别、费用计价粒度、报价范围、异常阈值、账期标准化及可比组划分。当前样例验证不能替代本阶段。
 
-## Never automate without explicit approval
+## 企业化部署
 
-- Final award, purchase order, contract signature, payment, or supplier commitment.
+身份认证与角色授权、审批人验证、长期证据存储、版本/审计检索、备份、批次权限、多采购员协作、内网部署、ERP/SRM只读接入和企业历史价格库。上线前独立完成安全、权限和恢复演练。
+
+## 专业能力扩展
+
+PDF文本和扫描/图片OCR（页码、区域证据）；原材料牌号/技术指标匹配；模具型腔、钢材、寿命、试模和维护比较；设备配置、产能、能耗和服务等效比较；供应商质量/履约历史；全生命周期成本。先形成可验证业务规则，再引入模型协助提取或解释。
+
+## 持续权限边界
+
+系统提供审核证据和采购建议。定标、订单、付款、合同及供应商承诺持续由企业授权人员处理。

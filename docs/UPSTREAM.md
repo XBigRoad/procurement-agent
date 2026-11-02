@@ -19,3 +19,17 @@ Checked and combined on 2026-11-01.
 ## Design boundary
 
 The LLM/Skill layer may extract, explain and ask for clarification. Numeric calculations, thresholds, rankings and provenance remain deterministic. A reasonableness flag is not an award decision.
+
+## Enterprise V1 extension, 2026-11-02
+
+`procurement_agent/scoring.py` adapts the MIT rfqdiff ratio formulas for Decimal
+arithmetic, zero-day delivery and exact-score ties. The retained upstream tree
+stays available as the original reference and regression suite. The production
+service uses a single enterprise pipeline for evidence, tax/fee normalization,
+comparability, scoped references, risk decisions and human-review replay.
+
+`.gitattributes` pins the shipped pilot CSV to LF so its existing golden SHA256
+stays byte-identical on Windows and Linux. Uploaded quotation bytes are not changed.
+
+Steedos purchase is a workflow/object-model reference only; it is not installed or
+vendored into this V1, and no order, approval mutation or supplier messaging is added.

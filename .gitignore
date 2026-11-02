@@ -9,3 +9,9 @@ __pycache__/
 *.png
 *.jpg
 .env
+output/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.streamlit/secrets.toml

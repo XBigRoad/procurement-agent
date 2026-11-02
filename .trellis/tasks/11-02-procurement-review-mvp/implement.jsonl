@@ -1,0 +1,2 @@
+{"file": "docs/DATA_CONTRACT.md", "reason": "Shared ingestion, engine and output interfaces"}
+{"file": ".trellis/spec/backend/procurement.md", "reason": "Evidence and decision safety invariants"}

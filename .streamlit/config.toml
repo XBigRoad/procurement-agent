@@ -1,0 +1,13 @@
+[server]
+address = "127.0.0.1"
+port = 8511
+headless = true
+maxUploadSize = 25
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+font = "sans serif"

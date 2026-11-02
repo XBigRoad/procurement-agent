@@ -6,6 +6,7 @@ changing the underlying calculations.
 """
 from __future__ import annotations
 
+import math
 from statistics import median
 from typing import Any, Iterable
 
@@ -13,11 +14,13 @@ from typing import Any, Iterable
 def _numbers(values: Iterable[Any]) -> list[float]:
     out: list[float] = []
     for value in values:
+        if isinstance(value, bool):
+            continue
         try:
             number = float(value)
         except (TypeError, ValueError):
             continue
-        if number >= 0:
+        if math.isfinite(number) and number > 0:
             out.append(number)
     return out
 
@@ -45,7 +48,11 @@ def analyze_price_reasonableness(
     for quote in quotes:
         supplier = str(quote.get("supplier") or quote.get("name") or "未命名供应商")
         try:
+            if isinstance(quote["price"], bool):
+                raise ValueError("boolean price")
             price = float(quote["price"])
+            if not math.isfinite(price) or price <= 0:
+                raise ValueError("invalid price")
         except (KeyError, TypeError, ValueError):
             findings.append({"supplier": supplier, "status": "insufficient_data", "reasons": ["缺少可计算报价"]})
             continue
@@ -77,7 +84,7 @@ def analyze_price_reasonableness(
         if not reasons:
             status = "within_reference_range"
             reasons.append("未发现超过当前阈值的价格偏离")
-        elif any(x in flags for x in ("not_comparable", "missing_fields", "unusually_low_vs_peers")):
+        elif any(x in flags for x in ("not_comparable", "missing_fields", "unusually_low_vs_peers")) or (history_delta is not None and history_delta <= -history_threshold):
             status = "review_required"
         else:
             status = "review_recommended"
